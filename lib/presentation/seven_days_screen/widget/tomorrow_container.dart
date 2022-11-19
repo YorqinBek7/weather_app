@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/utils/text_styles.dart';
 
 class TomorrowInfoContainers extends StatelessWidget {
@@ -12,10 +13,8 @@ class TomorrowInfoContainers extends StatelessWidget {
     return Column(
       children: [
         image,
-        const SizedBox(height: 5),
-        Text(infoText,
-            style: MyTextStyle.w500.copyWith(
-                fontSize: MediaQuery.of(context).size.aspectRatio * 30))
+        SizedBox(height: 5.h),
+        Text(infoText, style: MyTextStyle.w600.copyWith(fontSize: 7.sp))
       ],
     );
   }

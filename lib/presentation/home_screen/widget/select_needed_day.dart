@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SelectNeededDay extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class SelectNeededDay extends StatelessWidget {
         text,
         style: TextStyle(
             color: isNeededDay ? Colors.black : Colors.grey,
-            fontSize: 17,
+            fontSize: 8.sp,
             fontWeight: FontWeight.bold),
       ),
     );

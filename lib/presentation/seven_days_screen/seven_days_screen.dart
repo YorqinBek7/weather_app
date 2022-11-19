@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/models/daily_weather/get_daily_weather.dart';
 import 'package:weather_app/presentation/seven_days_screen/extansions/extansions.dart';
 import 'package:weather_app/presentation/seven_days_screen/widget/tomorrow_container.dart';
@@ -31,82 +32,102 @@ class _SevenDaysState extends State<SevenDays> {
         backgroundColor: const Color(0xfffeebcf),
         elevation: 0,
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.05),
+      body: Padding(
+        padding: EdgeInsets.all(8.0.r),
         child: Column(
           children: [
             Container(
+              height: 108.h,
               decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(
-                      MediaQuery.of(context).size.aspectRatio * 40)),
+                color: Colors.white.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(10.r),
+              ),
               padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05,
-                vertical: MediaQuery.of(context).size.height * 0.02,
+                horizontal: 11.w,
+                vertical: 8.h,
               ),
               width: double.infinity,
               child: Column(
                 children: [
-                  Row(children: [
-                    const Text(
-                      "Tomorrow",
-                      style: MyTextStyle.w500,
-                    ),
-                    const Expanded(child: SizedBox()),
-                    Text(
-                      "${"${widget.dailyWeather.daily[1].temp.day}".substring(0, 2)}°",
-                      style: MyTextStyle.w500,
-                    ),
-                    Image.network(
-                        imagePath(widget.dailyWeather.daily[1].weather[0].icon))
-                  ]),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                  Row(
+                    children: [
+                      Text(
+                        "Tomorrow",
+                        style: MyTextStyle.w600.copyWith(fontSize: 7.sp),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "${"${widget.dailyWeather.daily[1].temp.day}".substring(0, 2)}°",
+                        style: MyTextStyle.w700.copyWith(fontSize: 7.sp),
+                      ),
+                      Image.network(
+                        imagePath(widget.dailyWeather.daily[1].weather[0].icon),
+                        width: 32.w,
+                        height: 32.h,
+                      )
+                    ],
+                  ),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TomorrowInfoContainers(
                           infoText: widget
                               .dailyWeather.daily[1].weather[0].description,
-                          image: Image.asset("assets/images/weather.png")),
+                          image: Image.asset(
+                            "assets/images/weather.png",
+                            width: 22,
+                            height: 22,
+                          )),
                       TomorrowInfoContainers(
                           infoText: widget.dailyWeather.daily[1].wind_speed
                               .toString(),
-                          image: Image.asset("assets/images/wind.png")),
+                          image: Image.asset(
+                            "assets/images/wind.png",
+                            width: 22,
+                            height: 22,
+                          )),
                       TomorrowInfoContainers(
                           infoText: "${widget.dailyWeather.daily[1].humidity}%",
-                          image: Image.asset("assets/images/water_drop.png"))
+                          image: Image.asset(
+                            "assets/images/water_drop.png",
+                            width: 22,
+                            height: 22,
+                          ))
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            SizedBox(height: 16.h),
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: widget.dailyWeather.daily.length,
                 itemBuilder: (context, index) => Container(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.025),
-                  margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.005),
+                  height: 40.h,
+                  padding: EdgeInsets.only(left: 11.w),
+                  margin: EdgeInsets.symmetric(vertical: 2.5.h),
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(
-                          MediaQuery.of(context).size.aspectRatio * 25)),
+                    color: Colors.white.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
                   child: Row(children: [
                     Text(
                       getFormatWeekDays(widget.dailyWeather.daily[index].dt),
-                      style: MyTextStyle.w500,
+                      style: MyTextStyle.w600.copyWith(fontSize: 7.sp),
                     ),
-                    const Expanded(child: SizedBox()),
+                    const Spacer(),
                     Text(
                       "${"${widget.dailyWeather.daily[index].temp.day}".substring(0, 2)}°",
-                      style: MyTextStyle.w500,
+                      style: MyTextStyle.w700.copyWith(fontSize: 7.sp),
                     ),
-                    Image.network(imagePath(
-                        widget.dailyWeather.daily[index].weather[0].icon))
+                    Image.network(
+                      imagePath(
+                          widget.dailyWeather.daily[index].weather[0].icon),
+                      width: 24.w,
+                      height: 24.h,
+                    )
                   ]),
                 ),
               ),

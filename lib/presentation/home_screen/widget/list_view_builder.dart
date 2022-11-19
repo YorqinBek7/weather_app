@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/utils/constants.dart';
 import 'package:weather_app/utils/text_styles.dart';
@@ -25,33 +26,22 @@ class ListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.01),
-      padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.025,
-          vertical: MediaQuery.of(context).size.height * 0.025),
+      margin: EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(MediaQuery.of(context).size.aspectRatio * 65),
+        borderRadius: BorderRadius.circular(20.r),
         color: firstDt == otherDt ? selectedColor : notSelectedColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           firstDt == otherDt
-              ? Text(
-                  "Now",
-                  style: MyTextStyle.w500.copyWith(
-                      fontSize: MediaQuery.of(context).size.aspectRatio * 36),
-                )
+              ? Text("Now", style: MyTextStyle.w500.copyWith(fontSize: 7.sp))
               : Text(
                   DateFormat.Hm().format(
-                    DateTime.fromMillisecondsSinceEpoch(
-                      dateFormat * 1000,
-                    ),
+                    DateTime.fromMillisecondsSinceEpoch(dateFormat * 1000),
                   ),
-                  style: MyTextStyle.w500.copyWith(
-                      fontSize: MediaQuery.of(context).size.aspectRatio * 36),
+                  style: MyTextStyle.w500.copyWith(fontSize: 7.sp),
                 ),
           Image.network(
             imagePath(image),
@@ -59,9 +49,8 @@ class ListViewBuilder extends StatelessWidget {
             height: 50,
           ),
           Text(
-            "${"${temp}".substring(0, 2)}°",
-            style: MyTextStyle.w500.copyWith(
-                fontSize: MediaQuery.of(context).size.aspectRatio * 36),
+            "${"$temp".substring(0, 2)}°",
+            style: MyTextStyle.w500.copyWith(fontSize: 7.sp),
           ),
         ],
       ),

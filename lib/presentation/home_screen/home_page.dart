@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/presentation/home_screen/widget/alert_dialog.dart';
-import 'package:weather_app/presentation/home_screen/widget/appbar_containers.dart';
 import 'package:weather_app/models/current_weather/get_current_weather.dart';
 import 'package:weather_app/models/daily_weather/get_daily_weather.dart';
 import 'package:weather_app/presentation/home_screen/widget/information_containers.dart';
@@ -96,39 +95,41 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Scaffold(
         drawer: Drawer(
-          backgroundColor: Color(0xfffeebcf),
+          backgroundColor: const Color(0xfffeebcf),
           child: Column(
             children: [
-              SizedBox(height: 50),
+              SizedBox(height: 50.h),
               Text("Menu", style: MyTextStyle.w500),
               ListTile(
-                title: Text("Change Theme"),
+                title: const Text("Change Theme"),
                 trailing: Switch(
-                    value: isOn,
-                    onChanged: ((value) => {
-                          setState(
-                            () => {isOn = value},
-                          )
-                        })),
+                  value: isOn,
+                  onChanged: ((value) => {
+                        setState(
+                          () => {
+                            isOn = value,
+                          },
+                        )
+                      }),
+                ),
               ),
-              ListTile(
+              const ListTile(
                 title: Text("Settings"),
                 trailing: Icon(Icons.arrow_right),
               ),
-              ListTile(
+              const ListTile(
                 title: Text("Settings"),
                 trailing: Icon(Icons.arrow_right),
               ),
-              ListTile(
+              const ListTile(
                 title: Text("Settings"),
                 trailing: Icon(Icons.arrow_right),
               ),
-              Expanded(child: SizedBox()),
-              Text("By YorqinBek Yuldashev",
-                  style: MyTextStyle.w500.copyWith(fontSize: 14)),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.005,
-              )
+              const Expanded(child: SizedBox()),
+              Text(
+                "By YorqinBek Yuldashev",
+                style: MyTextStyle.w500.copyWith(fontSize: 14.sp),
+              ),
             ],
           ),
         ),
@@ -142,32 +143,6 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xfffeebcf),
           elevation: 0,
           actions: [
-            const Expanded(child: SizedBox()),
-            Row(
-              children: [
-                AppBarContainers(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                  width: 8,
-                  radius: 100,
-                ),
-                AppBarContainers(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                  width: MediaQuery.of(context).size.width * 0.02,
-                  radius: 100,
-                ),
-                AppBarContainers(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                  width: MediaQuery.of(context).size.width * 0.05,
-                  radius: 10,
-                ),
-                AppBarContainers(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                  width: MediaQuery.of(context).size.width * 0.02,
-                  radius: 100,
-                ),
-              ],
-            ),
-            const Expanded(child: SizedBox()),
             GestureDetector(
               onTap: () => {
                 setState(
@@ -190,10 +165,10 @@ class _HomePageState extends State<HomePage> {
                   },
                 )
               },
-              child: const Icon(
+              child: Icon(
                 Icons.search,
                 color: Colors.black,
-                size: 30,
+                size: 15.w,
               ),
             ),
             const SizedBox(width: 5)
@@ -208,15 +183,9 @@ class _HomePageState extends State<HomePage> {
                     searchText: searchController.text);
             setState(() {});
           },
-          child: ListView(children: [
-            Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.04,
-                right: MediaQuery.of(context).size.width * 0.04,
-                top: MediaQuery.of(context).size.height * 0.02,
-              ),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height - 120,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(8.0.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -224,27 +193,35 @@ class _HomePageState extends State<HomePage> {
                       ? Text(
                           "${currentWeatherByLonLat.name},\n${currentWeatherByLonLat.sys.country}",
                           style: MyTextStyle.w500.copyWith(
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.045,
-                          ))
+                            fontSize: 20.sp,
+                          ),
+                        )
                       : Text(
                           "${currentWeather.name},\n${currentWeather.sys.country}",
-                          style: MyTextStyle.w500.copyWith(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.045)),
-                  Text(time.toString(),
-                      style: MyTextStyle.w500.copyWith(
-                        color: Colors.grey,
-                        fontSize: MediaQuery.of(context).size.height * 0.02,
-                      )),
+                          style: MyTextStyle.w500.copyWith(fontSize: 20.sp)),
+                  Text(
+                    time.toString(),
+                    style: AdaptiveTheme.of(context)
+                        .theme
+                        .textTheme
+                        .headline5!
+                        .copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey,
+                        ),
+                  ),
                   Row(
                     children: [
                       firstTime
                           ? Image.network(
                               imagePath(currentWeatherByLonLat.weather[0].icon),
+                              width: 83.w,
+                              height: 80.h,
                             )
                           : Image.network(
                               imagePath(currentWeather.weather[0].icon),
+                              width: 83.w,
+                              height: 80.h,
                             ),
                       firstTime == true
                           ? MainTemp(
@@ -281,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                           title: "Humudity")
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+                  SizedBox(height: 20.h),
                   Row(
                     children: [
                       SelectNeededDay(
@@ -310,12 +287,13 @@ class _HomePageState extends State<HomePage> {
                         text: "Next 7 days >",
                         onPressed: () => {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SevenDays(
-                                  dailyWeather: dailyWeather,
-                                ),
-                              )),
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SevenDays(
+                                dailyWeather: dailyWeather,
+                              ),
+                            ),
+                          ),
                           setState(() {
                             isNeededDay = 2;
                           })
@@ -325,33 +303,37 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.005,
+                    height: 10.75.h,
                   ),
                   Stack(children: [
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.005,
+                      height: .5.h,
                       decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10)),
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     Positioned(
                       left: isNeededDay == 0
-                          ? MediaQuery.of(context).size.width * 0.05
+                          ? 8.w
                           : isNeededDay == 1
-                              ? MediaQuery.of(context).size.width * 0.27
-                              : MediaQuery.of(context).size.width * 0.73,
+                              ? 58.w
+                              : null,
+                      right: isNeededDay > 1 ? 22.w : null,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.055,
-                        height: MediaQuery.of(context).size.height * 0.35,
+                        width: 10.w,
+                        height: 3.h,
                         decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(3)),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
                       ),
                     ),
                   ]),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.025),
-                  Expanded(
+                  SizedBox(height: 9.h),
+                  SizedBox(
+                    height: 72.h,
                     child: PageView(
                       controller: pageController,
                       children: [
@@ -375,8 +357,9 @@ class _HomePageState extends State<HomePage> {
                         ListView(
                           scrollDirection: Axis.horizontal,
                           children: List.generate(
-                              dailyWeather.hourly.length ~/ 2, (index) {
-                            return ListViewBuilder(
+                            dailyWeather.hourly.length ~/ 2,
+                            (index) {
+                              return ListViewBuilder(
                                 dateFormat: dailyWeather
                                     .hourly[
                                         index + dailyWeather.hourly.length ~/ 2]
@@ -396,9 +379,10 @@ class _HomePageState extends State<HomePage> {
                                         index + dailyWeather.hourly.length ~/ 2]
                                     .temp,
                                 selectedColor: Colors.white,
-                                notSelectedColor:
-                                    Colors.white.withOpacity(0.5));
-                          }),
+                                notSelectedColor: Colors.white.withOpacity(0.5),
+                              );
+                            },
+                          ),
                         )
                       ],
                     ),
@@ -406,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ]),
+          ),
         ),
       );
     }

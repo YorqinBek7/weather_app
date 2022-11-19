@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/utils/text_styles.dart';
 
 class InformationContainers extends StatelessWidget {
@@ -19,27 +20,25 @@ class InformationContainers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.005),
-      padding: EdgeInsets.all(MediaQuery.of(context).size.aspectRatio * 45),
+      margin: EdgeInsets.symmetric(vertical: 2.5.h),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 11),
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(
-              MediaQuery.of(context).size.aspectRatio * 30)),
+          borderRadius: BorderRadius.circular(10.r)),
       child: Row(
         children: [
           image,
-          SizedBox(width: MediaQuery.of(context).size.height * 0.005),
+          SizedBox(width: 8.w),
           Text(
             title,
-            style: MyTextStyle.w500,
+            style: MyTextStyle.w400.copyWith(fontSize: 7.sp),
           ),
           const Expanded(child: SizedBox()),
           firstTime
-              ? Text(text, style: MyTextStyle.w500)
+              ? Text(text, style: MyTextStyle.w400.copyWith(fontSize: 7.sp))
               : Text(
                   text2,
-                  style: MyTextStyle.w500,
+                  style: MyTextStyle.w400.copyWith(fontSize: 7.sp),
                 ),
         ],
       ),
