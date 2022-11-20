@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/utils/text_styles.dart';
 
 class MainTemp extends StatelessWidget {
   final double temp;
@@ -14,11 +13,12 @@ class MainTemp extends StatelessWidget {
       children: [
         Text(
           "${"$temp".substring(0, 2)}°",
-          style: MyTextStyle.w500.copyWith(fontSize: 43.sp),
+          style: Theme.of(context).textTheme.headline3,
         ),
         Text(
           mainWeather,
-          style: MyTextStyle.w500.copyWith(fontSize: 14.sp),
+          style:
+              Theme.of(context).textTheme.headline4!.copyWith(fontSize: 14.sp),
         )
       ],
     );

@@ -31,14 +31,22 @@ class InformationContainers extends StatelessWidget {
           SizedBox(width: 8.w),
           Text(
             title,
-            style: MyTextStyle.w400.copyWith(fontSize: 7.sp),
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(fontWeight: FontWeight.w400),
           ),
           const Expanded(child: SizedBox()),
           firstTime
-              ? Text(text, style: MyTextStyle.w400.copyWith(fontSize: 7.sp))
+              ? Text(
+                  text,
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                )
               : Text(
                   text2,
-                  style: MyTextStyle.w400.copyWith(fontSize: 7.sp),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
         ],
       ),

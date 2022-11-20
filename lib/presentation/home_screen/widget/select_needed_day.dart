@@ -17,10 +17,12 @@ class SelectNeededDay extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
-            color: isNeededDay ? Colors.black : Colors.grey,
-            fontSize: 8.sp,
-            fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.headline6!.copyWith(
+              fontSize: 8.sp,
+              color: isNeededDay
+                  ? Theme.of(context).selectedRowColor
+                  : Theme.of(context).disabledColor,
+            ),
       ),
     );
   }

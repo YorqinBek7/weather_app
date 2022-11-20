@@ -18,18 +18,18 @@ class _SevenDaysState extends State<SevenDays> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfffeebcf),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Theme.of(context).buttonColor,
           ),
           onPressed: () => {
             Navigator.pop(context),
           },
         ),
-        backgroundColor: const Color(0xfffeebcf),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: Padding(
@@ -72,21 +72,23 @@ class _SevenDaysState extends State<SevenDays> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TomorrowInfoContainers(
-                          infoText: widget
-                              .dailyWeather.daily[1].weather[0].description,
-                          image: Image.asset(
-                            "assets/images/weather.png",
-                            width: 22,
-                            height: 22,
-                          )),
+                        infoText:
+                            widget.dailyWeather.daily[1].weather[0].description,
+                        image: Image.asset(
+                          "assets/images/weather.png",
+                          width: 22,
+                          height: 22,
+                        ),
+                      ),
                       TomorrowInfoContainers(
-                          infoText: widget.dailyWeather.daily[1].wind_speed
-                              .toString(),
-                          image: Image.asset(
-                            "assets/images/wind.png",
-                            width: 22,
-                            height: 22,
-                          )),
+                        infoText:
+                            widget.dailyWeather.daily[1].wind_speed.toString(),
+                        image: Image.asset(
+                          "assets/images/wind.png",
+                          width: 22,
+                          height: 22,
+                        ),
+                      ),
                       TomorrowInfoContainers(
                           infoText: "${widget.dailyWeather.daily[1].humidity}%",
                           image: Image.asset(
@@ -113,15 +115,12 @@ class _SevenDaysState extends State<SevenDays> {
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Row(children: [
-                    Text(
-                      getFormatWeekDays(widget.dailyWeather.daily[index].dt),
-                      style: MyTextStyle.w600.copyWith(fontSize: 7.sp),
-                    ),
+                    Text(getFormatWeekDays(widget.dailyWeather.daily[index].dt),
+                        style: Theme.of(context).textTheme.headline6),
                     const Spacer(),
                     Text(
-                      "${"${widget.dailyWeather.daily[index].temp.day}".substring(0, 2)}°",
-                      style: MyTextStyle.w700.copyWith(fontSize: 7.sp),
-                    ),
+                        "${"${widget.dailyWeather.daily[index].temp.day}".substring(0, 2)}°",
+                        style: Theme.of(context).textTheme.headline6),
                     Image.network(
                       imagePath(
                           widget.dailyWeather.daily[index].weather[0].icon),
