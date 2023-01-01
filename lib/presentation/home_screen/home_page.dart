@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
   final double lon;
   final double lat;
   const HomePage({super.key, required this.lat, required this.lon});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Scaffold(
         drawer: CustomDrawer(
-          isOn: isOn,
+          isOn: GetStorage().read("isDark") ?? false,
           onTap: (value) {
             setState(
               () => {
@@ -252,8 +251,9 @@ class _HomePageState extends State<HomePage> {
           lat: widget.lat, lon: widget.lon);
       setState(() => {});
     } catch (e) {
-      isError = true;
       isLoading = false;
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Qidirilgan manzil topilmadi!")));
       setState(() {});
     }
   }

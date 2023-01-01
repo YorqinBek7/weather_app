@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:location/location.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_app/presentation/home_screen/home_page.dart';
@@ -59,17 +60,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
+        systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.light,
-            statusBarColor: Colors.white,
+            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
             statusBarIconBrightness: Brightness.dark),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Center(
-        child: Lottie.asset("assets/lottie/weather.json"),
+        child: Lottie.asset("assets/lottie/weather.json",
+            width: 200.w, height: 200.h),
       ),
     );
   }

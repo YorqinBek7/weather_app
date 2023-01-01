@@ -25,31 +25,10 @@ class CustomDrawer extends StatelessWidget {
             ),
             trailing: Switch(value: isOn, onChanged: onTap),
           ),
-          ListTile(
-            title: Text(
-              "Settings",
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            trailing:
-                Icon(Icons.arrow_right, color: Theme.of(context).buttonColor),
-          ),
-          ListTile(
-            title:
-                Text("Settings", style: Theme.of(context).textTheme.headline5),
-            trailing:
-                Icon(Icons.arrow_right, color: Theme.of(context).buttonColor),
-          ),
-          ListTile(
-            title:
-                Text("Settings", style: Theme.of(context).textTheme.headline5),
-            trailing:
-                Icon(Icons.arrow_right, color: Theme.of(context).buttonColor),
-          ),
           const Spacer(),
-          Text(
-            "By YorqinBek Yuldashev",
-            style: MyTextStyle.w500.copyWith(fontSize: 14.sp),
-          ),
+          Text("By YorqinBek Yuldashev",
+              style: Theme.of(context).textTheme.headline5),
+          SizedBox(height: 5.h)
         ],
       ),
     );
